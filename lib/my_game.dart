@@ -1,5 +1,6 @@
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flame/components.dart';
 import 'components/background_component.dart'; // Background component
 import 'components/falling_circle_component.dart'; // Falling circle component
 
@@ -10,15 +11,9 @@ class MyGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     super.onLoad();
+    camera.backdrop.add(BackgroundComponent());
 
-    await Flame.images.load('background.jpg');
-
-    // Initialize and add the background component
-    background = BackgroundComponent();
-    add(background);
-
-    // Initialize and add the falling circle component
-    fallingCircle = FallingCircleComponent();
-    add(fallingCircle);
+    FallingCircleComponent fallingCircle = FallingCircleComponent();
+    world.add(fallingCircle);
   }
 }

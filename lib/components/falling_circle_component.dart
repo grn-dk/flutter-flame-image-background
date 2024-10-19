@@ -8,14 +8,20 @@ class FallingCircleComponent extends CircleComponent with HasGameRef {
       : super(
           radius: circleRadius, // Circle radius
           paint: Paint()..color = Colors.red, // Circle color
-        );
+        ) {
+    // Set the anchor to center the circle relative to its position
+    anchor = Anchor.center;
+  }
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
 
+    // Start the circle at the top middle of the world
     position = Vector2(
-        size.x / 2 - circleRadius, 0); // Start at the top middle of the screen
+      0, // Horizontally centered in world coordinates
+      -gameRef.size.y / 2 + circleRadius, // Start at the top of the world
+    );
   }
 
   @override
@@ -26,14 +32,8 @@ class FallingCircleComponent extends CircleComponent with HasGameRef {
     position.y += 100 * dt;
 
     // Reset the position if it falls below the screen
-    if (position.y > gameRef.size.y) {
-      position.y = 0; // Restart at the top
+    if (position.y > gameRef.size.y / 2) {
+      position.y = -gameRef.size.y / 2 + circleRadius; // Restart at the top
     }
-  }
-
-  @override
-  void onGameResize(Vector2 size) {
-    super.onGameResize(size);
-    position.x = size.x / 2 - circleRadius;
   }
 }
