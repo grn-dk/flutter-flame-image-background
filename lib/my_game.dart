@@ -1,4 +1,3 @@
-import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'components/background_component.dart';
@@ -13,9 +12,9 @@ class MyGame extends FlameGame {
     super.onLoad();
     //In our case we would like to have our camer anchor in top left corner : 0,0
     camera.viewfinder.anchor = Anchor.topLeft;
-    // Other option 
+    // Other option
     //camera.viewfinder.position = size/2;
-    
+
     camera.backdrop.add(BackgroundComponent());
     world.add(FallingCircleComponent());
   }
